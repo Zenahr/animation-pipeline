@@ -8,13 +8,11 @@ def flip_horizontally(input_file):
     ffmpeg.input(input_file).hflip().output('HF' + "-" + 'output.mp4').run()
 # flip_horizontally(TEST_FILE)
 
-def change_frame_rate(input_file, frame_rate=20):
-    # EQUIVALENT ffmpeg INVOCATION: ffmpeg -y -i i.mp4 -vf "setpts=1.25*PTS" -r 8 o.mp4
+def change_frame_rate(input_file, target_frame_rate=12):
     (
     ffmpeg
     .input(input_file)
-    .zoompan(fps=frame_rate)
-    .setpts('1.25*PTS')
+    .filter('fps', fps=target_frame_rate, round='up')
     .output(filename="output.mp4")
     .overwrite_output()
     .run(capture_stdout=0)
