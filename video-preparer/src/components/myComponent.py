@@ -1,1 +1,1 @@
-print("myComponent imported")
+print("hello from myComponent")
